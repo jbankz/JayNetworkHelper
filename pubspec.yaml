@@ -2,7 +2,7 @@ name: jaynetwork
 description: A network handler for flutter.
 version: 0.0.1
 author: JayCode <vsquare396@gmail.com>
-homepage: https://github.com/jaybankz
+homepage: https://github.com/jbankz/JayNetworkHelper.git
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
