@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'model/dummy_model.dart';
 import 'repository/repository.dart';
 
@@ -46,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 23,
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () => _makeNetworkRequestState(),
               child: Text('Make Network Call'),
             ),
@@ -65,10 +66,11 @@ class _MyHomePageState extends State<MyHomePage> {
           _dummyData = success;
           setState(() {});
         },
-        failure: (error, code, message) => print('Failed: $error =====> $code'),
+        failure: (error, code, message) =>
+            print('Failed: $error =====> $code ======> $message'),
       );
     } catch (e) {
-      debugPrint('Error: $e');
+      debugPrint('FailedMessage: $e');
     }
   }
 }
