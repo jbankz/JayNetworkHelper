@@ -3,23 +3,21 @@ import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache/dio_http_cache.dart';
-import 'package:flutter/foundation.dart';
 
 class JayNetworkClient {
   Dio _dio;
   String _baseURL;
-  int _defaultConnectTimeout;
-  int _defaultReceiveTimeout;
+  int defaultConnectTimeout;
+  int defaultReceiveTimeout;
 
-  final List<Interceptor> _interceptors;
+  final List<Interceptor> interceptors;
 
   JayNetworkClient(
-    this._baseURL, [
-    this._interceptors,
-    this._defaultConnectTimeout = Duration.millisecondsPerMinute,
-    this._defaultReceiveTimeout = Duration.millisecondsPerMinute,
-  ]) {
+    this._baseURL, {
+    this.interceptors,
+    this.defaultConnectTimeout = Duration.millisecondsPerMinute,
+    this.defaultReceiveTimeout = Duration.millisecondsPerMinute,
+  }) {
     _dio = Dio();
     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
@@ -29,25 +27,13 @@ class JayNetworkClient {
     };
     _dio
       ..options.baseUrl = _baseURL
-      ..options.connectTimeout = _defaultConnectTimeout
-      ..options.receiveTimeout = _defaultReceiveTimeout
+      ..options.connectTimeout = defaultConnectTimeout
+      ..options.receiveTimeout = defaultReceiveTimeout
       ..httpClientAdapter
       ..options.headers = {'Content-Type': 'application/json; charset=UTF-8'};
-    if (_interceptors?.isNotEmpty ?? false) {
-      _dio.interceptors.add(DioCacheManager(CacheConfig(
-        defaultMaxAge: Duration(days: 10),
-        maxMemoryCacheCount: 3,
-      )).interceptor);
-      _dio.interceptors.addAll(_interceptors);
-    }
-    if (kDebugMode) {
-      _dio.interceptors.add(LogInterceptor(
-          responseBody: true,
-          error: true,
-          requestHeader: false,
-          responseHeader: false,
-          request: false,
-          requestBody: false));
+
+    if (interceptors?.isNotEmpty ?? false) {
+      _dio.interceptors.addAll(interceptors);
     }
   }
 

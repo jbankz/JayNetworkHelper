@@ -1,11 +1,16 @@
+import 'dart:math';
+
 import 'package:example/configs/constants.dart';
 import 'package:example/model/dummy_model.dart';
 import 'package:jaynetwork/jaynetwork.dart';
 
+Random _rnd = Random();
+
 // Make your repository method return //* dynamic
 Future<ApiResponse<dynamic>> makeNetworkRequestRepository() async {
   try {
-    final _response = await jayNetworkClient.makeGetRequest('users/1');
+    final _response =
+        await jayNetworkClient.makeGetRequest('users/${_rnd.nextInt(10)}');
     return ApiResponse.success(
         statusMessage: _response.statusMessage,
         data: DummyData.fromJson(_response.data),

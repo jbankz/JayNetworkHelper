@@ -1,3 +1,11 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - Initial release.
 
-* TODO: Describe initial release.
+* This is the initial release of this project
+
+## [1.0.1] - Dependecies update.
+
+* Made updates dependencies
+
+## [1.0.2] - Network interceptor.
+
+* Added interceptor for request retrier when there is connectivity
