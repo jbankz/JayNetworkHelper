@@ -75,29 +75,29 @@ abstract class NetworkExceptions with _$NetworkExceptions {
     }
   }
 
-  static NetworkExceptions getJayNetworkException(error) {
+  static NetworkExceptions? getJayNetworkException(error) {
     if (error is Exception) {
       try {
-        NetworkExceptions networkExceptions;
+        NetworkExceptions? networkExceptions;
         if (error is DioError) {
           switch (error.type) {
-            case DioErrorType.CANCEL:
+            case DioErrorType.cancel:
               networkExceptions = NetworkExceptions.requestCancelled();
               break;
-            case DioErrorType.CONNECT_TIMEOUT:
+            case DioErrorType.connectTimeout:
               networkExceptions = NetworkExceptions.requestTimeout();
               break;
-            case DioErrorType.DEFAULT:
+            case DioErrorType.other:
               networkExceptions = NetworkExceptions.noInternetConnection();
               break;
-            case DioErrorType.RECEIVE_TIMEOUT:
+            case DioErrorType.receiveTimeout:
               networkExceptions = NetworkExceptions.sendTimeout();
               break;
-            case DioErrorType.RESPONSE:
+            case DioErrorType.response:
               networkExceptions =
-                  NetworkExceptions.handleResponse(error.response);
+                  NetworkExceptions.handleResponse(error.response!);
               break;
-            case DioErrorType.SEND_TIMEOUT:
+            case DioErrorType.sendTimeout:
               networkExceptions = NetworkExceptions.sendTimeout();
               break;
           }

@@ -9,14 +9,15 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
   final DioConnectivityRequestRetrier requestRetrier;
 
   RetryOnConnectionChangeInterceptor({
-    @required this.requestRetrier,
+    required this.requestRetrier,
   });
 
   @override
-  Future onError(DioError err) async {
+  Future onError(
+      DioError err, ErrorInterceptorHandler interceptorHandler) async {
     if (_shouldRetry(err)) {
       try {
-        return requestRetrier.scheduleRequestRetry(err.request);
+        return requestRetrier.scheduleRequestRetry(err);
       } catch (e) {
         // Let any new error from the retrier pass through
         return e;
@@ -27,7 +28,7 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
   }
 
   bool _shouldRetry(DioError err) {
-    return err.type == DioErrorType.DEFAULT &&
+    return err.type == DioErrorType.other &&
         err.error != null &&
         err.error is SocketException;
   }

@@ -8,10 +8,10 @@ part 'api_result.freezed.dart';
 @freezed
 abstract class ApiResponse<T> with _$ApiResponse<T> {
   const factory ApiResponse.success(
-      {@required T data, int statusCode, String statusMessage}) = Success<T>;
+      {required T data, int? statusCode, String? statusMessage}) = Success<T>;
 
   const factory ApiResponse.failure(
-      {@required NetworkExceptions error,
-      int statusCode,
-      String statusMessage}) = Failure<T>;
+      {required NetworkExceptions error,
+      int? statusCode,
+      String? statusMessage}) = Failure<T>;
 }
