@@ -1,15 +1,19 @@
-## [0.0.1] - Initial release.
+## [2.0.1] - connectivity_plus.
 
-- This is the initial release of this project
+- Migrated from the deprecated connectivity plugin to connectivity_plus.
 
-## [1.0.1] - Dependecies update.
+## [2.0.0] - Null safety.
 
-- Made updates dependencies
+- Upgraded to null safety
 
 ## [1.0.2] - Network interceptor.
 
 - Added interceptor for request retrier when there is connectivity
 
-## [2.0.0] - Null safety.
+## [1.0.1] - Dependecies update.
 
-- Upgraded to null safety
+- Made updates dependencies
+
+## [0.0.1] - Initial release.
+
+- This is the initial release of this project
